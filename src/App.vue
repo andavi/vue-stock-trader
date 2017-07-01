@@ -31,16 +31,44 @@
     body {
         padding: 20px;
     }
+    /*.slide-fade-enter-active {*/
+        /*transition: all .3s ease;*/
+    /*}*/
+    /*.slide-fade-leave-active {*/
+        /*transition: all .3s ease;*/
+    /*}*/
+    /*.slide-fade-enter, .slide-fade-leave-to*/
+        /*!* .slide-fade-leave-active for <2.1.8 *! {*/
+        /*transform: translateY(-30px);*/
+        /*opacity: 0;*/
+    /*}*/
+
     .slide-fade-enter-active {
-        transition: all .3s ease;
+        animation: slide-fade-in 200ms ease-out forwards;
     }
     .slide-fade-leave-active {
-        transition: all .3s ease;
+        animation: slide-fade-out 200ms ease-out forwards;
     }
-    .slide-fade-enter, .slide-fade-leave-to
-        /* .slide-fade-leave-active for <2.1.8 */ {
-        transform: translateY(-10px);
-        opacity: 0;
+    @keyframes slide-fade-in {
+        from {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
+    @keyframes slide-fade-out {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+    }
+
 
 </style>
