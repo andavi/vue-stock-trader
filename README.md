@@ -4,6 +4,8 @@
 
 This is the final project from the Udemy [VueJS 2 course](https://www.udemy.com/vuejs-2-the-complete-guide).
 
+App deployed [here](http://andavi-stock-trader.s3-website-us-east-1.amazonaws.com/).
+
 ## Build Setup
 
 ``` bash

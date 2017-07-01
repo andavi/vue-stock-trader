@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         funds: 10000,
+        assets: 0,
         companies: [
             {
                 name: 'BMW',
@@ -33,6 +34,9 @@ export const store = new Vuex.Store({
         funds: state => {
             return state.funds;
         },
+        assets: state => {
+            return state.assets;
+        },
         companies: state => {
             return state.companies;
         }
@@ -41,30 +45,33 @@ export const store = new Vuex.Store({
         buy: (state, payload) => {
             payload.company.quantity += payload.quantity;
             state.funds -= payload.quantity * payload.company.price;
+            state.assets += payload.quantity * payload.company.price;
             payload.reset();
         },
 
         sell: (state, payload) => {
             payload.company.quantity -= payload.quantity;
             state.funds += payload.quantity * payload.company.price;
+            state.assets -= payload.quantity * payload.company.price;
             payload.reset();
         },
         endDay: (state) => {
             const range = 0.25;
-            // let netHoldDelta = 0;
+            let netAssetDelta = 0;
 
             state.companies.forEach((company => {
                 // get random price change from -spread to spread computed as percentage of price
                 let spread = Math.ceil(company.price * range);
                 let priceDelta = Math.floor(Math.random() * (spread * 2 + 1) ) - spread;
-                // update company price and ensure not zero or below
+                // update company price and ensure not negative
                 let newCompPrice = company.price + priceDelta;
                 company.price = (newCompPrice <= 0) ? 0 : newCompPrice;
 
                 // // data could be used to show daily gain/loss and/or net worth
-                // let holdDelta = company.quantity * priceDelta;
-                // netHoldDelta += holdDelta;
+                let assetDelta = company.quantity * priceDelta;
+                netAssetDelta += assetDelta;
             }));
+            state.assets += netAssetDelta;
         },
         save: (state, callback) => {
             callback(state);

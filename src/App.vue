@@ -31,18 +31,6 @@
     body {
         padding: 20px;
     }
-    /*.slide-fade-enter-active {*/
-        /*transition: all .3s ease;*/
-    /*}*/
-    /*.slide-fade-leave-active {*/
-        /*transition: all .3s ease;*/
-    /*}*/
-    /*.slide-fade-enter, .slide-fade-leave-to*/
-        /*!* .slide-fade-leave-active for <2.1.8 *! {*/
-        /*transform: translateY(-30px);*/
-        /*opacity: 0;*/
-    /*}*/
-
     .slide-fade-enter-active {
         animation: slide-fade-in 200ms ease-out forwards;
     }
@@ -69,6 +57,4 @@
             opacity: 0;
         }
     }
-
-
 </style>
