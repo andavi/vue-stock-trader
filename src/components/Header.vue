@@ -69,6 +69,7 @@
                     })
                     .then(position => {
                         state.funds = position.funds;
+                        state.assets = position.assets;
                         state.companies = position.companies;
                     });
             }

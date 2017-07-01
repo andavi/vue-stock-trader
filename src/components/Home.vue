@@ -1,50 +1,142 @@
 <template>
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="text-align: center">
         <div class="panel-body">
-                <h1>Trade or View your Portfolio</h1>
-                <p>You may Save & Load your data.</p>
-                <p>Click on 'End Day' to begin a new Day!</p>
-        </div>
-        <hr>
-        <div class="row" style="text-align: center">
-            <div class="col-sm-4"><span class="label label-success">Funds</span></div>
-            <div class="col-sm-4"><span class="label label-info">Assets</span></div>
-            <div class="col-sm-4"><span class="label label-default">To High Score</span></div>
-        </div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-success" :style="{width: fundsPercentage + '%'}">
-                {{ fundsPercentage }}%
+            <h1>Trade or View your Portfolio</h1>
+            <p>You may <span class="label label-default">Save & Load</span> your data.</p>
+            <p>Click on <span class="label label-default">End Day</span> to begin a new Day!</p>
+            <hr>
+
+            <div class="row">
+                <div
+                        class="alert alert-danger"
+                        style="text-align: center"
+                        v-if="!newHighNet"
+                >Make more than {{ lastSavedNet | currency }} to earn a new High Score!
+                </div>
+                <div
+                        class="alert alert-success"
+                        style="text-align: center"
+                        v-else>You've beat the High Score of {{ lastSavedNet | currency
+                    }}! Keep going and don't forget to save!
+                </div>
             </div>
-            <div class="progress-bar progress-bar-info" :style="{width: assetsPercentage + '%'}">
-                {{ assetsPercentage }}%
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">Your Funds</div>
+                        <div class="panel-body">{{ funds | currency }}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Your Assets</div>
+                        <div class="panel-body">{{ assets | currency }}</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">Your Net Worth</div>
+                        <div class="panel-body">{{ net | currency }}</div>
+                    </div>
+                </div>
+
             </div>
-            <!--<div class="progress-bar progress-bar-gray progress-bar-striped" style="width: 10%">-->
-                <!--<span class="sr-only">10% Complete (danger)</span>-->
             <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div-->
+            <!--class="alert alert-danger"-->
+            <!--style="text-align: center"-->
+            <!--v-if="!newHighNet"-->
+            <!--&gt;Make more than {{ lastSavedNet | currency }} to earn a new High Score!</div>-->
+            <!--<div-->
+            <!--class="alert alert-success"-->
+            <!--style="text-align: center"-->
+            <!--v-else>You've beat the High Score of {{ lastSavedNet | currency }}! Keep going and don't forget to save!</div>-->
+            <!--</div>-->
+            <div v-if="!newHighNet">
+                <div class="row" style="text-align: center">
+                    <div class="col-sm-4"><span class="label label-success">Funds</span></div>
+                    <div class="col-sm-4"><span class="label label-info">Assets</span></div>
+                    <div class="col-sm-4"><span class="label label-light">To High Score</span></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" :style="{width: fundsPercentOfHigh + '%'}">
+                        {{ fundsPercentOfHigh }}%
+                    </div>
+                    <div class="progress-bar progress-bar-info" :style="{width: assetsPercentOfHigh + '%'}">
+                        {{ assetsPercentOfHigh }}%
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="row" style="text-align: center">
+                    <div class="col-sm-6"><span class="label label-success">Funds</span></div>
+                    <div class="col-sm-6"><span class="label label-info">Assets</span></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" :style="{width: fundsPercentOfNet + '%'}">
+                        {{ fundsPercentOfNet }}%
+                    </div>
+                    <div class="progress-bar progress-bar-info" :style="{width: assetsPercentOfNet + '%'}">
+                        {{ assetsPercentOfNet }}%
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapMutations} from 'vuex';
+
     export default{
-        data: function() {
+        data: function () {
             return {
-                lastSavedNet: 15000
+                lastSavedNet: 0
             }
         },
         computed: {
             funds() {
                 return this.$store.getters.funds;
             },
-            fundsPercentage() {
+            fundsPercentOfHigh() {
                 return Math.round(100 * this.funds / this.lastSavedNet);
+            },
+            fundsPercentOfNet() {
+                return Math.round(100 * this.funds / this.net);
             },
             assets() {
                 return this.$store.getters.assets;
             },
-            assetsPercentage() {
+            assetsPercentOfHigh() {
                 return Math.round(100 * this.assets / this.lastSavedNet);
             },
+            assetsPercentOfNet() {
+                return Math.round(100 * this.assets / this.net);
+            },
+            net() {
+                return this.funds + this.assets;
+            },
+            newHighNet() {
+                return this.net > this.lastSavedNet;
+            }
+        },
+        methods: {
+            ...mapMutations([
+                'load'
+            ]),
+            getLastSavedNet(){
+                this.$http.get('')
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(position => {
+                        this.lastSavedNet = position.funds + position.assets;
+                    });
+            }
+        },
+        created() {
+            this.getLastSavedNet();
         }
     }
 </script>
@@ -53,7 +145,14 @@
     .progress {
         margin: 30px;
     }
-    .label-default {
+
+    .label-light {
         background-color: lightgray;
     }
+
+    .alert {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
 </style>
