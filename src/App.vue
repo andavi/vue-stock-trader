@@ -1,9 +1,13 @@
 <template>
     <div class="container">
         <app-header></app-header>
-        <transition name="slide-fade" mode="out-in">
-            <router-view></router-view>
-        </transition>
+        <div class="row">
+            <div class="col-xs-12">
+                <transition name="slide-fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -24,6 +28,9 @@
 </script>
 
 <style>
+    body {
+        padding: 20px;
+    }
     .slide-fade-enter-active {
         transition: all .3s ease;
     }

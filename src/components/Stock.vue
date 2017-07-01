@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-md-4">
         <div class="panel" :class="[company.price > 0 ? 'panel-success' : 'panel-danger']">
             <div class="panel-heading">
                 <div class="panel-title">

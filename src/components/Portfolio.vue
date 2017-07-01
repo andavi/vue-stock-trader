@@ -1,8 +1,6 @@
 <template>
-    <div class="row">
-        <div class="col-sm-12">
-            <app-position v-for="company in companies" :company="company"></app-position>
-        </div>
+    <div>
+        <app-position v-for="company in companies" :company="company"></app-position>
     </div>
 </template>
 

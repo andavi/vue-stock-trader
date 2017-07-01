@@ -5,7 +5,7 @@
             <p>You may Save & Load your data.</p>
             <p>Click on 'End Day' to begin a new Day!</p>
             <hr>
-            <h3>Your fund: ${{ funds }}</h3>
+            <h3>Your funds: {{ funds | currency }}</h3>
         </div>
     </div>
 </template>
