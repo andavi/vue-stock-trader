@@ -3,7 +3,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <router-link to="/" tag="a" class="navbar-brand" active-class="active">Stock Trader</router-link>
+                    <router-link to="/" tag="a" class="navbar-brand" active-class="active"><span class="glyphicon glyphicon-usd"></span><strong>tock Trader</strong></router-link>
                 </div>
                 <ul class="nav navbar-nav">
                     <router-link to="/portfolio" tag="li" active-class="active"><a>Portfolio</a></router-link>
@@ -24,7 +24,7 @@
                             <li><a href="#" @click.prevent="load(loadState)">Load</a></li>
                         </ul>
                     </li>
-                    <li><a style="font-weight: bold">Funds: {{ funds | currency }}</a></li>
+                    <li><a style="font-weight: bold">Funds: {{ funds | currency }} <span class="glyphicon glyphicon-signal"></span></a></li>
                 </ul>
             </div>
         </nav>
