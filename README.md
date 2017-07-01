@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+This is the final project from the Udemy [VueJS 2 course](https://www.udemy.com/vuejs-2-the-complete-guide).
+
 ## Build Setup
 
 ``` bash
