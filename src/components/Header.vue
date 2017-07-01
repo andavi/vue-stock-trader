@@ -62,6 +62,7 @@
                 'load'
             ]),
             saveState(state) {
+                state.lastSavedNet = state.funds + state.assets;
                 this.$http.put('', state)
                     .then(response => {
                         console.log(response);
@@ -77,6 +78,7 @@
                     .then(position => {
                         state.funds = position.funds;
                         state.assets = position.assets;
+                        state.lastSavedNet = position.lastSavedNet;
                         state.companies = position.companies;
                     });
             }

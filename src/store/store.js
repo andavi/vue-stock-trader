@@ -7,6 +7,7 @@ export const store = new Vuex.Store({
     state: {
         funds: 10000,
         assets: 0,
+        lastSavedNet: 0,
         companies: [
             {
                 name: 'BMW',
@@ -39,6 +40,9 @@ export const store = new Vuex.Store({
         },
         companies: state => {
             return state.companies;
+        },
+        lastSavedNet: state => {
+            return state.lastSavedNet;
         }
     },
     mutations: {
@@ -56,7 +60,7 @@ export const store = new Vuex.Store({
             payload.reset();
         },
         endDay: (state) => {
-            const range = 0.25;
+            const range = 0.5;
             let netAssetDelta = 0;
 
             state.companies.forEach((company => {
@@ -75,6 +79,7 @@ export const store = new Vuex.Store({
         },
         save: (state, callback) => {
             callback(state);
+            // state.justSaved = true;
         },
         load: (state, callback) => {
             callback(state);

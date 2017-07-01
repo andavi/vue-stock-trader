@@ -21,25 +21,32 @@
                         <div class="panel-body">{{ net | currency }}</div>
                     </div>
                 </div>
-
             </div>
 
             <div class="row">
                 <div
-                        class="alert alert-danger"
-                        style="text-align: center"
-                        v-if="!newHighNet"
-                >Make more than <strong>{{ lastSavedNet | currency }}</strong> to earn a new High Score!
-                </div>
-                <div
                         class="alert alert-success"
                         style="text-align: center"
-                        v-else>You've beat the High Score of <strong>{{ lastSavedNet| currency
-                    }}</strong> ! Keep going and don't forget to save!
+                        v-if="newHighNet">You've beat the High Score of <strong>{{ lastSavedNet | currency
+                    }}</strong>! Keep going and don't forget to save!
+                </div>
+
+                <div
+                        class="alert alert-danger"
+                        style="text-align: center"
+                        v-else-if="net <= 0"
+                >It takes money to make money in this world and you just lost all yours. Better luck next time!
+                </div>
+
+                <div
+                        class="alert alert-info"
+                        style="text-align: center"
+                        v-else>You have to make over <strong>{{ lastSavedNet | currency
+                    }}</strong> to beat the High Score!
                 </div>
             </div>
 
-            <div v-if="!newHighNet">
+            <div v-if="!newHighNet && !netEqualsHigh">
                 <div class="row" style="text-align: center">
                     <div class="col-sm-4"><span class="label label-success">Funds</span></div>
                     <div class="col-sm-4"><span class="label label-info">Assets</span></div>
@@ -80,10 +87,12 @@
     export default{
         data: function () {
             return {
-                lastSavedNet: 0
             }
         },
         computed: {
+            lastSavedNet() {
+                return this.$store.getters.lastSavedNet;
+            },
             funds() {
                 return this.$store.getters.funds;
             },
@@ -106,22 +115,30 @@
                 return this.funds + this.assets;
             },
             newHighNet() {
-                return this.net >= this.lastSavedNet;
+                return this.net > this.lastSavedNet;
+            },
+            netEqualsHigh() {
+                return this.net == this.lastSavedNet;
             }
         },
         methods: {
-            getLastSavedNet(){
+            ...mapMutations([
+                'endDay',
+                'save',
+                'load'
+            ]),
+            getLastSavedNet(state){
                 this.$http.get('')
                     .then(response => {
                         return response.json();
                     })
                     .then(position => {
-                        this.lastSavedNet = position.funds + position.assets;
+                        state.lastSavedNet = position.funds + position.assets;
                     });
             }
         },
         created() {
-            this.getLastSavedNet();
+            this.load(this.getLastSavedNet);
         }
     }
 </script>
