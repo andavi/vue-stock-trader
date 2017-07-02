@@ -87,5 +87,7 @@
 </script>
 
 <style scoped>
-
+    nav {
+        max-height: 52px;
+    }
 </style>
