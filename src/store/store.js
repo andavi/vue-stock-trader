@@ -66,7 +66,7 @@ export const store = new Vuex.Store({
             state.companies.forEach((company => {
                 // get random price change from -spread to spread computed as percentage of price
                 let spread = Math.ceil(company.price * range);
-                let priceDelta = Math.floor(Math.random() * (spread * 1 + 1)) - spread;
+                let priceDelta = Math.floor(Math.random() * (spread * 2 + 1)) - spread;
                 // update company price and ensure not negative
                 let newCompPrice = company.price + priceDelta;
                 company.price = (newCompPrice <= 0) ? 0 : newCompPrice;

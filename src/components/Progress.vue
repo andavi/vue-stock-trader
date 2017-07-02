@@ -50,7 +50,7 @@
                 <div class="row" style="text-align: center">
                     <div class="col-sm-4"><span class="label label-success">Funds</span></div>
                     <div class="col-sm-4"><span class="label label-info">Assets</span></div>
-                    <div class="col-sm-4"><span class="label label-light">Until High Score</span></div>
+                    <div class="col-sm-4"><span class="label label-light">Distance to High Score</span></div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success" :style="{width: fundsPercentOfHigh + '%'}">
