@@ -1,6 +1,15 @@
 <template>
     <div>
-        <app-position v-for="company in companies" :company="company"></app-position>
+        <div v-if="companies.length">
+            <app-position v-for="company in companies" :company="company"> 0"></app-position>
+        </div>
+        <div class="panel panel-warning" v-else>
+            <div class="panel-heading text-center">
+                <div class="panel-title">
+                    You do not own any stocks! Go buy some from the Stocks page.
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -20,3 +29,10 @@
         }
     }
 </script>
+
+<style scoped>
+    .panel {
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+</style>

@@ -60,13 +60,22 @@ export const store = new Vuex.Store({
             payload.reset();
         },
         endDay: (state) => {
-            const range = 0.5;
+            // this is the range percent that a company price will change
+            const range = 0.25;
+
+            // this is a number in [0,1) that influences negative or positive delta
+            // greater than 0.5 markets are more likely to grow and less than vice versa
+            const marketHealth = 0.45;
+
+            // accumulate assets delta here
             let netAssetDelta = 0;
 
             state.companies.forEach((company => {
                 // get random price change from -spread to spread computed as percentage of price
                 let spread = Math.ceil(company.price * range);
-                let priceDelta = Math.floor(Math.random() * (spread * 2 + 1)) - spread;
+                let priceDelta = Math.floor(Math.random() * (spread + 1));
+                priceDelta = (Math.random() >= marketHealth) ? priceDelta : -priceDelta;
+
                 // update company price and ensure not negative
                 let newCompPrice = company.price + priceDelta;
                 company.price = (newCompPrice <= 0) ? 0 : newCompPrice;
@@ -79,7 +88,7 @@ export const store = new Vuex.Store({
         },
         save: (state, callback) => {
             callback(state);
-            // state.justSaved = true;
+
         },
         load: (state, callback) => {
             callback(state);
