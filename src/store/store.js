@@ -61,11 +61,11 @@ export const store = new Vuex.Store({
         },
         endDay: (state) => {
             // this is the range percent that a company price will change
-            const range = 0.25;
+            const range = 0.35;
 
             // this is a number in [0,1) that influences likelihood of a negative or positive priceDelta
             // greater than 0.5 markets are more likely to grow and less than 0.5 will likely decline
-            const marketHealth = 0.525;
+            const marketHealth = 0.5;
 
             // accumulate assets delta here
             let netAssetDelta = 0;

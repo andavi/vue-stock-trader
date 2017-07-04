@@ -3,19 +3,19 @@
         <div class="panel-heading"><h4 class="text-muted">Watch your Progress here</h4></div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-sm-4 col-xs-12">
+                <div class="col-sm-4">
                     <div class="panel panel-success">
                         <div class="panel-heading">Your Funds</div>
                         <div class="panel-body">{{ funds | currency }}</div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
+                <div class="col-sm-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">Your Assets</div>
                         <div class="panel-body">{{ assets | currency }}</div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
+                <div class="col-sm-4">
                     <div class="panel panel-warning">
                         <div class="panel-heading">Your Net Worth</div>
                         <div class="panel-body">{{ net | currency }}</div>
@@ -86,8 +86,7 @@
 
     export default{
         data: function () {
-            return {
-            }
+            return {}
         },
         computed: {
             lastSavedNet() {

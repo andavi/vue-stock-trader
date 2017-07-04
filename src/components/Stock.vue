@@ -5,7 +5,7 @@
 
                 <div class="panel-title pull-left h3">
                     {{ company.name }}
-                    <small>(Price: {{ company.price }})</small>
+                    <small>(Price: {{ company.price | currency }})</small>
                 </div>
                 <div class="panel-title pull-right h3">
                     <small>Shares: {{ company.quantity }}</small>
