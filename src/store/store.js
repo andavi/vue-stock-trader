@@ -65,7 +65,13 @@ export const store = new Vuex.Store({
 
             // this is a number in [0,1) that influences likelihood of a negative or positive priceDelta
             // greater than 0.5 markets are more likely to grow and less than 0.5 will likely decline
-            const marketHealth = 0.5;
+            let marketHealth = 0.5;
+            let flux = new Date().getMinutes() % 5;
+            if (flux === 0) {
+                marketHealth = 0.3;
+            } else if (flux === 4) {
+                marketHealth = 0.7;
+            }
 
             // accumulate assets delta here
             let netAssetDelta = 0;

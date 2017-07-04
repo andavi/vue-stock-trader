@@ -28,20 +28,20 @@
                         class="alert alert-success"
                         style="text-align: center"
                         v-if="newHighNet">You've beat the High Score of <strong>{{ lastSavedNet | currency
-                    }}</strong>! Keep going and don't forget to save!
+                    }}</strong>! Save now to set the new high score!
                 </div>
 
                 <div
                         class="alert alert-danger"
                         style="text-align: center"
                         v-else-if="net <= 0"
-                >It takes money to make money in this world and you just lost all yours. Better luck next time!
+                >It takes money to make money in this world, and you just lost all yours. Better luck next time champ!
                 </div>
 
                 <div
                         class="alert alert-info"
                         style="text-align: center"
-                        v-else>You have to make over <strong>{{ lastSavedNet | currency
+                        v-else>You have to have a net worth over <strong>{{ lastSavedNet | currency
                     }}</strong> to beat the High Score!
                 </div>
             </div>
