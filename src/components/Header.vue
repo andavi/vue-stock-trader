@@ -14,7 +14,11 @@
                     <router-link to="/progress" tag="li" active-class="active"><a>Progress</a></router-link>
                 </ul>
                 <div class="navbar-text navbar-right">
-                    <small>Funds: {{ funds | currency }} <span class="glyphicon glyphicon-signal"></span></small>
+                    <small>Funds: {{ funds | currency }}
+                        <span
+                                class="glyphicon glyphicon-signal"
+                                title="The secret is in the colored labels!"></span>
+                    </small>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" @click="endDay">End Day</a></li>

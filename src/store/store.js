@@ -86,7 +86,7 @@ export const store = new Vuex.Store({
                 let newCompPrice = company.price + priceDelta;
                 company.price = (newCompPrice <= 0) ? 0 : newCompPrice;
 
-                // // data could be used to show daily gain/loss and/or net worth
+                // data used to show daily gain/loss and/or net worth
                 let assetDelta = company.quantity * priceDelta;
                 netAssetDelta += assetDelta;
             }));

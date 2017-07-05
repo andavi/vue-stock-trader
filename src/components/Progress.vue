@@ -35,13 +35,13 @@
                         class="alert alert-danger"
                         style="text-align: center"
                         v-else-if="net <= 0"
-                >It takes money to make money in this world, and you just lost all yours. Better luck next time champ!
+                >It takes money to make money in this world, and you just lost all yours. Better luck next time Champ!
                 </div>
 
                 <div
                         class="alert alert-info"
                         style="text-align: center"
-                        v-else>You have to have a net worth over <strong>{{ lastSavedNet | currency
+                        v-else>You have to make a net worth of over <strong>{{ lastSavedNet | currency
                     }}</strong> to beat the High Score!
                 </div>
             </div>

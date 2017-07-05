@@ -60,3 +60,14 @@
         }
     }
 </script>
+
+<style>
+    .panel-heading h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: normal;
+        width: 75%;
+        padding-top: 8px;
+    }
+</style>
